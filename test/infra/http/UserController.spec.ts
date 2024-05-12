@@ -14,8 +14,7 @@ describe('User Controller should', () =>{
         controller = new UserController(useCase.object);
     });
 
-    it('return 400 error', async () =>{
-
+    it('return 400 error when user is already exists', async () =>{
         useCase.setup(x => x.execute(TypeMoq.It.isAny()))
                 .returns(() => CreateUserResult.userAlreadyExists());
 
@@ -24,6 +23,38 @@ describe('User Controller should', () =>{
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(400)
+    });
+
+    it('return 400 error when user is empty', async () =>{
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'', password:'password', role:'admin'}});
+        const anyResponse: MockResponse<Response> = createResponse();
+        const response = await controller.execute(anyRequest, anyResponse);
+
+        expect(response.statusCode).toBe(400)
+    });
+
+    it('return 400 error when password is empty', async () =>{
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'', role:'admin'}});
+        const anyResponse: MockResponse<Response> = createResponse();
+        const response = await controller.execute(anyRequest, anyResponse);
+
+        expect(response.statusCode).toBe(400)
+    });
+
+    it('return 400 error when password is too short', async () =>{
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'1234567', role:'admin'}});
+        const anyResponse: MockResponse<Response> = createResponse();
+        const response = await controller.execute(anyRequest, anyResponse);
+
+        expect(response.statusCode).toBe(400)
+    });
+
+    it('return 500 error when role is empty', async () =>{
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:''}});
+        const anyResponse: MockResponse<Response> = createResponse();
+        const response = await controller.execute(anyRequest, anyResponse);
+
+        expect(response.statusCode).toBe(500)
     });
 
     it('return 500 error', async () => {
@@ -47,4 +78,5 @@ describe('User Controller should', () =>{
 
         expect(response.statusCode).toBe(201)
     });
+
 });
