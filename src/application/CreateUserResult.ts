@@ -3,8 +3,6 @@ export enum AppError {
     UserAlreadyExists,
     CannotCreateMoreAdmins,
     CannotSaveUser,
-    EmptyDataNotAllowed,
-    PasswordTooShort,
 }
 
 export class CreateUserResult {

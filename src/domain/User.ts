@@ -1,26 +1,28 @@
-import { Result } from "../exercise2/Result";
-import { AppError } from "../application/CreateUserResult";
+import { EmptyDataNotAllowedError, PasswordTooShortError } from "../application/Errors";
 
 export class User {
+    public readonly username: string
+    public readonly password: string
+    public readonly role: UserRole
+
     constructor(
-        readonly username: string,
-        readonly password: string,
-        readonly role: UserRole
-    ) {}
-
-    isAdmin(): boolean {
-        return this.role === UserRole.ADMIN
-    }
-
-    static create(username: string, password: string, role: string): Result<User> {
+        username: string,
+        password: string,
+        role: string
+    ) {
         if (isNullOrEmpty(username) || isNullOrEmpty(password)) {
-            return Result.failure(AppError.EmptyDataNotAllowed)
+            throw new EmptyDataNotAllowedError()
         }
         if (password.length < 8) {
-            return Result.failure(AppError.PasswordTooShort)
+            throw new PasswordTooShortError()
         }
 
-        return Result.success(new User(username, password, userRoleFrom(role)))
+        this.username = username
+        this.password = password
+        this.role = userRoleFrom(role)
+    }
+    isAdmin(): boolean {
+        return this.role === UserRole.ADMIN
     }
 }
 

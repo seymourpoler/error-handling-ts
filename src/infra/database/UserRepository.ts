@@ -3,6 +3,7 @@ import { CreateUserResult } from "../../application/CreateUserResult";
 
 export class UserRepository {
     private readonly users: Array<User> = []
+    
     exists(user: User): boolean {
         return this.users.find(u => u.username === user.username) !== undefined
     }

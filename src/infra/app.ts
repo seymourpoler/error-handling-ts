@@ -12,6 +12,17 @@ const app = Express()
 app.use(Express.json())
 app.use(Express.urlencoded({ extended: false }))
 
+
+app.get('/ping', (req, res) => {
+    console.log('ping');
+    res.send('pong!')
+});
+
+app.get('/status', (req, res) => {
+    console.log('status');
+    res.send('Hello World!')
+});
+
 app.post('/users', (req, res) => {
     return userController.execute(req, res)
 })
