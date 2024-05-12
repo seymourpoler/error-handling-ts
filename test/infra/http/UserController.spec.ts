@@ -65,8 +65,7 @@ describe('User Controller should', () =>{
     it('return 500 error', async () => {
         useCase.setup(x => x.execute(TypeMoq.It.isAny()))
                 .returns(() => CreateUserResult.cannotSaveUser());
-
-                const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
         
         const response = await controller.execute(anyRequest, anyResponse);
@@ -77,8 +76,7 @@ describe('User Controller should', () =>{
     it('return 201', async () => {
         useCase.setup(x => x.execute(TypeMoq.It.isAny()))
                 .returns(() => CreateUserResult.success());
-
-                const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
+        const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
         
         const response = await controller.execute(anyRequest, anyResponse);
