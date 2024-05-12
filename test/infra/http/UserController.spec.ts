@@ -20,6 +20,7 @@ describe('User Controller should', () =>{
 
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(400)
@@ -28,6 +29,7 @@ describe('User Controller should', () =>{
     it('return 400 error when user is empty', async () =>{
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(400)
@@ -36,6 +38,7 @@ describe('User Controller should', () =>{
     it('return 400 error when password is empty', async () =>{
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(400)
@@ -44,6 +47,7 @@ describe('User Controller should', () =>{
     it('return 400 error when password is too short', async () =>{
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'1234567', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(400)
@@ -52,6 +56,7 @@ describe('User Controller should', () =>{
     it('return 500 error when role is empty', async () =>{
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:''}});
         const anyResponse: MockResponse<Response> = createResponse();
+
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(500)
@@ -63,6 +68,7 @@ describe('User Controller should', () =>{
 
                 const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(500)
@@ -74,9 +80,9 @@ describe('User Controller should', () =>{
 
                 const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
+        
         const response = await controller.execute(anyRequest, anyResponse);
 
         expect(response.statusCode).toBe(201)
     });
-
 });
