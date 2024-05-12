@@ -17,7 +17,6 @@ describe('User Controller should', () =>{
     it('return 400 error when user is already exists', async () =>{
         useCase.setup(x => x.execute(TypeMoq.It.isAny()))
                 .returns(() => CreateUserResult.userAlreadyExists());
-
         const anyRequest: MockRequest<Request> = createRequest({body:{username:'username', password:'password', role:'admin'}});
         const anyResponse: MockResponse<Response> = createResponse();
         
