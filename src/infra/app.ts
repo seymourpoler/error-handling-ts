@@ -1,11 +1,11 @@
 import Express from 'express'
-import { UserController } from "./http/UserController"
+import { CreateUserController } from "./http/CreateUserController"
 import { CreateUserUseCase } from "../application/CreateUserUseCase"
 import { UserRepository } from "./database/UserRepository"
 
 const userRepository = new UserRepository()
 const createUserUseCase = new CreateUserUseCase(userRepository)
-const userController = new UserController(createUserUseCase)
+const createUserController = new CreateUserController(createUserUseCase)
 
 const app = Express()
 
@@ -24,7 +24,7 @@ app.get('/status', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    return userController.execute(req, res)
+    return createUserController.execute(req, res)
 })
 
 export default app
