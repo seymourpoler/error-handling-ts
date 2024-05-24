@@ -1,5 +1,5 @@
 import { User } from "../../domain/User";
-import { FindUserResult } from "../../application/FindUserResult";
+import { FindUserResult } from "../../application/User/FindUserResult";
 
 export class UserRepository {
     private readonly users: Array<User> = []
