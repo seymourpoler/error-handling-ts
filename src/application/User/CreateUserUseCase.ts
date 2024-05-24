@@ -1,5 +1,5 @@
-import { UserRepository } from "../infra/database/UserRepository";
-import { User } from "../domain/User";
+import { User } from "../../domain/User";
+import { UserRepository } from "../../infra/database/UserRepository";
 import { CreateUserResult } from "./CreateUserResult";
 
 
