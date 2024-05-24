@@ -1,5 +1,5 @@
 import { User } from "../../domain/User";
-import { CreateUserResult } from "../../application/CreateUserResult";
+import { FindUserResult } from "../../application/FindUserResult";
 
 export class UserRepository {
     private readonly users: Array<User> = []
@@ -12,12 +12,7 @@ export class UserRepository {
         return this.users.filter(u => u.isAdmin()).length
     }
 
-    save(user: User): CreateUserResult {
-        try {
-            this.users.push(user)
-            return CreateUserResult.success()
-        } catch (error) {
-            return CreateUserResult.cannotSaveUser()
-        }
+    find(username: string) : FindUserResult {
+        throw new Error("Method not implemented.");
     }
 }

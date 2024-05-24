@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { CreateUserUseCase } from "../../application/CreateUserUseCase";
 import { User } from "../../domain/User";
 import { EmptyDataNotAllowedError, PasswordTooShortError } from "../../application/Errors";
-import { AppError } from "../../application/CreateUserResult";
+import { AppError } from "../../application/AppError";
 
 
 export class CreateUserController {

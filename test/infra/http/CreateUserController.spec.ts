@@ -1,9 +1,9 @@
 import * as TypeMoq from "typemoq";
-import { CreateUserUseCase } from '../../../src/application/CreateUserUseCase';
+import { CreateUserUseCase } from '../../../src/application/User/CreateUserUseCase';
 import { CreateUserController } from '../../../src/infra/http/CreateUserController';
 import { Request, Response } from 'express';
 import { createRequest, createResponse, MockRequest, MockResponse } from 'node-mocks-http';
-import { CreateUserResult } from "../../../src/application/CreateUserResult";
+import { CreateUserResult } from "../../../src/application/User/CreateUserResult";
 
 describe('User Controller should', () =>{
     let useCase: TypeMoq.IMock<CreateUserUseCase>;
