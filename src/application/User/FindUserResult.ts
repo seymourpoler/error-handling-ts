@@ -1,4 +1,4 @@
-import { AppError } from "./AppError";
+import { AppError } from "../AppError";
 
 export class FindUserResult {
     constructor(public readonly user: AppError | null) {}
