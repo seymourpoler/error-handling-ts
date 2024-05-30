@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import { FindUserUseCase, FindUserArgs } from "../../application/User/FindUserUseCase";
 
 export class FindUserController {

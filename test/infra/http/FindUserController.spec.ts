@@ -29,7 +29,7 @@ describe('FindUserUseCase Should', () => {
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response<User>> = createResponse();
     const anyUser = new User('any-user-name', 'any-password', 'admin');
-    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => anyUser);
+    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(anyUser));
 
     const response = await controller.execute(anyRequest, anyResponse);
 
