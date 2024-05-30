@@ -7,7 +7,7 @@ export class FindUserController {
     public async execute(request: Request, response: Response) : Promise<Response> {
         const { username } = request.params;
 
-        const args = { username } as FindUserArgs;
+        const args : FindUserArgs = { username : username };
         const user = await this.findUserUseCase.execute(args);
 
         if (!user) {
