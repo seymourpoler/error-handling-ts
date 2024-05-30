@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { CreateUserUseCase } from "../../application/CreateUserUseCase";
+import { CreateUserUseCase } from "../../application//User/CreateUserUseCase";
 import { User } from "../../domain/User";
 import { EmptyDataNotAllowedError, PasswordTooShortError } from "../../application/Errors";
 import { AppError } from "../../application/AppError";
@@ -9,7 +9,7 @@ export class CreateUserController {
     constructor(private readonly createUserUseCase: CreateUserUseCase) {}
 
     // @ts-ignore we put this because ts intellisense is not smart enough to understand that we are covering all return cases
-    public async execute(request: Request, response: Response): Response {
+    public async execute(request: Request, response: Response): Promise<Response> {
         const { username, password, role } = request.body
 
         try {

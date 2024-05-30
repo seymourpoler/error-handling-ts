@@ -1,6 +1,6 @@
 import Express from 'express'
 import { CreateUserController } from "./http/CreateUserController"
-import { CreateUserUseCase } from "../application/CreateUserUseCase"
+import { CreateUserUseCase } from "../application/User/CreateUserUseCase"
 import { UserRepository } from "./database/UserRepository"
 
 const userRepository = new UserRepository()
