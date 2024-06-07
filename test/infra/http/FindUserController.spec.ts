@@ -4,6 +4,7 @@ import { createRequest, createResponse, MockRequest, MockResponse } from 'node-m
 import { FindUserUseCase } from "../../../src/application/User/FindUserUseCase";
 import { FindUserController } from '../../../src/infra/http/FindUserController';
 import { User } from '../../../src/domain/User';
+import { Either } from '../../../src/domain/Either';
 
 describe('FindUserUseCase Should', () => {
     let findUser: TypeMoq.IMock<FindUserUseCase>;
@@ -18,6 +19,7 @@ describe('FindUserUseCase Should', () => {
     const username = 'any-user-name';
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response> = createResponse();
+    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(Either.createLeft(new Error('User not found'))));
 
     const response = await controller.execute(anyRequest, anyResponse);
 
@@ -28,7 +30,7 @@ describe('FindUserUseCase Should', () => {
     const username = 'any-user-name';
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response<User>> = createResponse();
-    const anyUser = new User('any-user-name', 'any-password', 'admin');
+    const anyUser = Either.createRight(new User('any-user-name', 'any-password', 'admin'));
     findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(anyUser));
 
     const response = await controller.execute(anyRequest, anyResponse);

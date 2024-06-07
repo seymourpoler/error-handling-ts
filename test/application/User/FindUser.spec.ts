@@ -1,7 +1,6 @@
 import * as TypeMoq from "typemoq";
 import { UserRepository } from '../../../src/infra/database/UserRepository';
 import { FindUserUseCase } from '../../../src/application/User/FindUserUseCase';
-import { FindUserResult } from "../../../src/application/User/FindUserResult";
 
 describe('FindUser Should', () => {
   let userRepository: TypeMoq.IMock<UserRepository>;
@@ -18,6 +17,9 @@ describe('FindUser Should', () => {
       
       const result = await findUserUseCase.execute({ username });
 
-      expect(result).toBe(null);
+      result.fold(
+        () => { throw new Error('User not found'); },
+        (error: Error) => { expect(error).toBeInstanceOf(Error); }
+      );
     });
 });
