@@ -7,7 +7,8 @@
     "debug:test": "vitest",
     "test:bun": "bun test",
     "test:bun:watch": "bun test --watch",
-    "test:vitest": "bun test"
+    "test:vitest": "vitest",
+    "test:vitest:watch": "vitest watch"
   },
   "private": true,
   "dependencies": {
