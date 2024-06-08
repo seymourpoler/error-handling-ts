@@ -1,4 +1,5 @@
 import * as TypeMoq from 'typemoq';
+import { describe, beforeEach, it, expect } from "vitest";
 import { Request, Response } from 'express';
 import { createRequest, createResponse, MockRequest, MockResponse } from 'node-mocks-http';
 import { FindUserUseCase } from "../../../src/application/User/FindUserUseCase";
@@ -31,7 +32,7 @@ describe('FindUserUseCase Should', () => {
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response<User>> = createResponse();
     const anyUser = Either.createRight(new User('any-user-name', 'any-password', 'admin'));
-    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(anyUser));
+    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => anyUser);
 
     const response = await controller.execute(anyRequest, anyResponse);
 

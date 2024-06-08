@@ -1,3 +1,4 @@
+import { describe, test, expect } from "vitest";
 import { Either, Left, Right } from '../../src/domain/Either';
 
 describe('Either should', () => {

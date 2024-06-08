@@ -1,4 +1,5 @@
 import * as TypeMoq from "typemoq";
+import { describe, beforeEach, it, expect } from "vitest";
 import { CreateUserUseCase } from '../../../src/application/User/CreateUserUseCase';
 import { CreateUserController } from '../../../src/infra/http/CreateUserController';
 import { Request, Response } from 'express';
