@@ -19,13 +19,6 @@
             "name": "Run Current File",
             "request": "launch",
             "program": "${workspaceFolder}/build/infra/app.js"
-        },
-        {
-            "type": "node-terminal",
-            "name": "Debug Current Test File (npm run debug:test)",
-            "request": "launch",
-            "command": "npm run debug:test -- ${fileBasenameNoExtension}",
-            "cwd": "${fileDirname}"
         }
     ]
 }
