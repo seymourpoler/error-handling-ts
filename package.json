@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "debug:test": "jest",
+    "debug:test": "vitest",
     "test:bun": "bun test",
     "test:bun:watch": "bun test --watch",
     "test:vitest": "bun test"
@@ -18,12 +18,8 @@
     "typescript": "^5.4.2"
   },
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
     "@tsconfig/node20": "^20.1.4",
-    "@types/jest": "^29.5.12",
-    "jest": "^29.7.0",
     "node-mocks-http": "^1.14.1",
-    "ts-jest": "^29.1.2",
     "typemoq": "^2.1.0",
     "vitest": "^1.6.0"
   }
