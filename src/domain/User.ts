@@ -1,23 +1,23 @@
 import { EmptyDataNotAllowedError, PasswordTooShortError } from "../application/Errors";
 
 export class User {
-    public readonly username: string
+    public readonly email: string
     public readonly password: string
     public readonly role: UserRole
 
     constructor(
-        username: string,
+        email: string,
         password: string,
         role: string
     ) {
-        if (isNullOrEmpty(username) || isNullOrEmpty(password)) {
+        if (isNullOrEmpty(email) || isNullOrEmpty(password)) {
             throw new EmptyDataNotAllowedError()
         }
         if (password.length < 8) {
             throw new PasswordTooShortError()
         }
 
-        this.username = username
+        this.email = email
         this.password = password
         this.role = userRoleFrom(role)
     }

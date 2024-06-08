@@ -3,9 +3,12 @@ import { CreateUserController } from "./http/CreateUserController"
 import { CreateUserUseCase } from "../application/User/CreateUserUseCase"
 import { FindUserController } from "./http/FindUserController"
 import { FindUserUseCase } from "../application/User/FindUserUseCase"
+import { Configuration } from './database/Configuration'
+import { ConnectionFactory } from './database/ConnectionFactory'
 import { UserRepository } from "./database/UserRepository"
 
-const userRepository = new UserRepository()
+const connectionFactory = new ConnectionFactory(new Configuration());
+const userRepository = new UserRepository(connectionFactory);
 const findUserUseCase = new FindUserUseCase(userRepository)
 const createUserUseCase = new CreateUserUseCase(userRepository)
 const createUserController = new CreateUserController(createUserUseCase)
