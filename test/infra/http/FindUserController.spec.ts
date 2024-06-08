@@ -20,7 +20,8 @@ describe('FindUserUseCase Should', () => {
     const username = 'any-user-name';
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response> = createResponse();
-    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(Either.createLeft(new Error('User not found'))));
+    const userNotFoundError = Promise.resolve(Either.createLeft<Error, User>(new Error('User not found')));
+    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => userNotFoundError);
 
     const response = await controller.execute(anyRequest, anyResponse);
 
