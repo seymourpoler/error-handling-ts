@@ -1,4 +1,5 @@
 import * as TypeMoq from "typemoq";
+import { describe, beforeEach, it } from "vitest";
 import { UserRepository } from '../../../src/infra/database/UserRepository';
 import { FindUserUseCase } from '../../../src/application/User/FindUserUseCase';
 
