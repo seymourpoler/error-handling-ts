@@ -5,15 +5,14 @@ export class FindUserController {
     constructor(private readonly findUserUseCase: FindUserUseCase) {}
 
     public async execute(request: Request, response: Response) : Promise<Response> {
-        const { username } = request.params;
+        const username  = request.body.username;
 
         const args : FindUserArgs = { username : username };
         const user = await this.findUserUseCase.execute(args);
 
-        if (!user) {
-            return response.status(404).json({ message: 'User not found' });
-        }
-
-        return response.status(200).json(user);
+        return user.fold(
+            user => response.status(200).json(user),
+            () => response.status(404).json({ message: 'User not found' })
+        );
     }
 }
