@@ -31,8 +31,8 @@ describe('FindUserUseCase Should', () => {
     const username = 'any-user-name';
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response<User>> = createResponse();
-    const anyUser = Either.createRight(new User('any-user-name', 'any-password', 'admin'));
-    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => anyUser);
+    const anyUser = Either.createRight<Error, User>(new User('any-user-name', 'any-password', 'admin'));
+    findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(anyUser));
 
     const response = await controller.execute(anyRequest, anyResponse);
 
