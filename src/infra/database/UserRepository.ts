@@ -6,6 +6,7 @@ export interface IUserRepository {
     exists(user: User): boolean;
     countOfAdmins(): number;
     save(user: User): CreateUserResult;
+    find(email: string) : Promise<User | null>;
 }
 
 export class UserRepository implements IUserRepository {
