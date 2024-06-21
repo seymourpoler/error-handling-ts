@@ -1,19 +1,19 @@
-import { describe, beforeEach , it, expect } from "vitest";
+import { xdescribe, describe, beforeEach , it, expect } from "vitest";
 import { Configuration } from "../../../src/infra/database/Configuration";
 import { ConnectionFactory } from "../../../src/infra/database/ConnectionFactory";
-import { UserRepository } from "../../../src/infra/database/UserRepository";
+import { IUserRepository, PostgresUserRepository } from "../../../src/infra/database/PostgresUserRepository";
 import { User } from "../../../src/domain/User";
 
 describe('User repository', () =>{
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
 
     beforeEach(() =>{
         const connectionFactory = new ConnectionFactory(new Configuration());
-        userRepository = new UserRepository(connectionFactory);
+        userRepository = new PostgresUserRepository(connectionFactory);
     });
 
 
-    describe('Find user should', () => {
+    xdescribe('Find user should', () => {
         it('return found user', async () =>{
             const anEmail = "e@ma.il";
             

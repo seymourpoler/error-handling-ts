@@ -1,14 +1,14 @@
 import * as TypeMoq from "typemoq";
 import { describe, beforeEach, it, expect } from "vitest";
-import { UserRepository } from '../../../src/infra/database/UserRepository';
+import { IUserRepository } from '../../../src/infra/database/PostgresUserRepository';
 import { FindUserUseCase } from '../../../src/application/User/FindUserUseCase';
 
 describe('FindUser Should', () => {
-  let userRepository: TypeMoq.IMock<UserRepository>;
+  let userRepository: TypeMoq.IMock<IUserRepository>;
   let findUserUseCase: FindUserUseCase;
 
   beforeEach(() => {
-    userRepository = TypeMoq.Mock.ofType<UserRepository>();
+    userRepository = TypeMoq.Mock.ofType<IUserRepository>();
     findUserUseCase = new FindUserUseCase(userRepository.object);
   });
 
