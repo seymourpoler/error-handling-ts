@@ -5,10 +5,10 @@ import { FindUserController } from "./http/FindUserController"
 import { FindUserUseCase } from "../application/User/FindUserUseCase"
 import { Configuration } from './database/Configuration'
 import { ConnectionFactory } from './database/ConnectionFactory'
-import { UserRepository } from "./database/UserRepository"
+import { PostgresUserRepository } from "./database/PostgresUserRepository"
 
 const connectionFactory = new ConnectionFactory(new Configuration());
-const userRepository = new UserRepository(connectionFactory);
+const userRepository = new PostgresUserRepository(connectionFactory);
 const findUserUseCase = new FindUserUseCase(userRepository)
 const createUserUseCase = new CreateUserUseCase(userRepository)
 const createUserController = new CreateUserController(createUserUseCase)
