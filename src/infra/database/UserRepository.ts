@@ -2,7 +2,13 @@ import { ConnectionFactory } from "./ConnectionFactory";
 import { User } from "../../domain/User";
 import { CreateUserResult } from "../../application/User/CreateUserResult";
 
-export class UserRepository {
+export interface IUserRepository {
+    exists(user: User): boolean;
+    countOfAdmins(): number;
+    save(user: User): CreateUserResult;
+}
+
+export class UserRepository implements IUserRepository {
     private readonly users: Array<User> = []
     private readonly connectionFactory: ConnectionFactory;
 
