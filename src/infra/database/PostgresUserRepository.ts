@@ -2,14 +2,14 @@ import { ConnectionFactory } from "./ConnectionFactory";
 import { User } from "../../domain/User";
 import { CreateUserResult } from "../../application/User/CreateUserResult";
 
-export interface IUserRepository {
+export interface UserRepository {
     exists(user: User): boolean;
     countOfAdmins(): number;
     save(user: User): CreateUserResult;
     find(email: string) : Promise<User | null>;
 }
 
-export class PostgresUserRepository implements IUserRepository {
+export class PostgresUserRepository implements UserRepository {
     private readonly users: Array<User> = []
     private readonly connectionFactory: ConnectionFactory;
 

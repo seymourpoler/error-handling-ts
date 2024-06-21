@@ -1,11 +1,11 @@
 import { xdescribe, describe, beforeEach , it, expect } from "vitest";
 import { Configuration } from "../../../src/infra/database/Configuration";
 import { ConnectionFactory } from "../../../src/infra/database/ConnectionFactory";
-import { IUserRepository, PostgresUserRepository } from "../../../src/infra/database/PostgresUserRepository";
+import { UserRepository, PostgresUserRepository } from "../../../src/infra/database/PostgresUserRepository";
 import { User } from "../../../src/domain/User";
 
 describe('User repository', () =>{
-    let userRepository: IUserRepository;
+    let userRepository: UserRepository;
 
     beforeEach(() =>{
         const connectionFactory = new ConnectionFactory(new Configuration());

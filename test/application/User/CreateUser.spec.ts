@@ -1,6 +1,6 @@
 import * as TypeMoq from "typemoq";
 import { describe, beforeEach, it, expect } from "vitest";
-import { IUserRepository } from '../../../src/infra/database/PostgresUserRepository';
+import { UserRepository } from '../../../src/infra/database/PostgresUserRepository';
 import { CreateUserUseCase } from '../../../src/application/User/CreateUserUseCase';
 import { User } from '../../../src/domain/User';
 import { CreateUserResult } from '../../../src/application/User/CreateUserResult';
@@ -8,11 +8,11 @@ import { AppError } from "../../../src/application/AppError";
 
 
 describe('Use case: create a user should', () => {
-    let repository : TypeMoq.IMock<IUserRepository>;
+    let repository : TypeMoq.IMock<UserRepository>;
     let createUser: CreateUserUseCase;
 
     beforeEach(() => { 
-        repository =  TypeMoq.Mock.ofType<IUserRepository>();
+        repository =  TypeMoq.Mock.ofType<UserRepository>();
         createUser = new CreateUserUseCase(repository.object)
     });
 

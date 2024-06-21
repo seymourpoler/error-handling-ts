@@ -1,11 +1,11 @@
 import { User } from "../../domain/User";
-import { IUserRepository } from "../../infra/database/PostgresUserRepository";
+import { UserRepository } from "../../infra/database/PostgresUserRepository";
 import { CreateUserResult } from "./CreateUserResult";
 
 export class CreateUserUseCase {
 
     private static readonly MAX_NUMBER_OF_ADMINS = 2
-    constructor(private readonly userRepository: IUserRepository) {}
+    constructor(private readonly userRepository: UserRepository) {}
 
     execute(user: User): CreateUserResult {
         if (this.userRepository.exists(user)) {
