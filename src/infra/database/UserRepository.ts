@@ -16,15 +16,15 @@ export class UserRepository implements IUserRepository {
         this.connectionFactory = connectionFactory;
     }
 
-    exists(user: User): boolean {
+    public exists(user: User): boolean {
         return this.users.find(u => u.email === user.email) !== undefined
     }
 
-    countOfAdmins(): number {
+    public countOfAdmins(): number {
         return this.users.filter(u => u.isAdmin()).length
     }
 
-    save(user: User): CreateUserResult {
+    public save(user: User): CreateUserResult {
         throw new Error("Method not implemented.");
     }
 
