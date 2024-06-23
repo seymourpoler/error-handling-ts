@@ -1,4 +1,4 @@
-import { xdescribe, describe, beforeEach , it, expect } from "vitest";
+import { describe, beforeEach , it, expect } from "vitest";
 import { Configuration } from "../../../src/infra/database/Configuration";
 import { ConnectionFactory } from "../../../src/infra/database/ConnectionFactory";
 import { UserRepository, PostgresUserRepository } from "../../../src/infra/database/PostgresUserRepository";
@@ -13,7 +13,7 @@ describe('User repository', () =>{
     });
 
 
-    xdescribe('Find user should', () => {
+    describe.skip('Find user should', () => {
         it('return found user', async () =>{
             const anEmail = "e@ma.il";
             
