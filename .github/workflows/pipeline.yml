@@ -48,5 +48,5 @@ jobs:
 
         - name: Run tests
           env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+            DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           run: npm run test:vitest 
