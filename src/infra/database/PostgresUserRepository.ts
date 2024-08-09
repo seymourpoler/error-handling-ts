@@ -12,10 +12,8 @@ export interface UserRepository {
 
 export class PostgresUserRepository implements UserRepository {
     private readonly users: Array<User> = []
-    private readonly connectionFactory: ConnectionFactory;
 
-    public constructor(connectionFactory: ConnectionFactory){
-        this.connectionFactory = connectionFactory;
+    public constructor(private readonly connectionFactory: ConnectionFactory){
     }
 
     public exists(user: User): boolean {
