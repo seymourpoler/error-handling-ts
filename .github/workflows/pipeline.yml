@@ -43,8 +43,10 @@ jobs:
             done
 
         - name: Create table
+          env:
+            PGPASSWORD: postgres
           run: |
-            psql -h localhost -U postgres -d postgres -c "CREATE TABLE users(email VARCHAR(250), email VARCHAR(250), role VARCHAR(50));"
+            psql -h localhost -U postgres -d postgres -c "CREATE TABLE users(email VARCHAR(250), password VARCHAR(250), role VARCHAR(50));"
 
         - name: Run tests
           env:
