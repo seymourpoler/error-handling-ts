@@ -28,34 +28,30 @@ export class PostgresUserRepository implements UserRepository {
     }
 
     public async save(user: User): Promise<CreateUserResult> {
+        const sql = `INSERT INTO public.users (email, password, role) VALUES ($1, $2, $3)`;
         const connection = this.connectionFactory.create();
-        const users = await connection`
-            INSERT 
-            INTO public.users (email, password, role)
-            VALUES (${user.email}, ${user.password}, ${user.role})`;
+        await connection.query(sql, [user.email, user.password, user.role]);
         
         return CreateUserResult.success();
     }
 
     public async find(email: string) : Promise<User | null> {
+        const sql = `SELECT * FROM public.users WHERE email = $1`;
         const connection = this.connectionFactory.create();
-        const users = await connection<User[]>`
-            SELECT *
-            FROM public.users
-            WHERE users.email = % ${email} %`;
-
-        if(users.length === 0){
+        const result = await connection.query(sql, [email]);
+        if(result.length === 0){
             return null;
         }
 
-        return users[0]
+        return result.rows
+        .map((row: any) => new User(row.email, row.password, row.role))
+        .pop();
     }
 
     public async delete(email: string): Promise<void> {
+        const sql = `DELETE FROM public.users WHERE email = $1`;
         const connection = this.connectionFactory.create();
-        const users = await connection`
-            DELETE
-            FROM public.users
-            WHERE users.email = % ${email} %`;
+        
+        await connection.query(sql, [email]);
     }
 }

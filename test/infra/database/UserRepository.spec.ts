@@ -14,7 +14,7 @@ describe('User repository', () =>{
         userRepository.save(new User(anEmail, "password", "admin"));
     });
 
-    describe.skip('Find user should', () => {
+    describe('Find user should', () => {
         it('return found user', async () =>{          
             const user = await userRepository.find(anEmail);
 
@@ -23,6 +23,7 @@ describe('User repository', () =>{
             expect(user?.email).toBe(anEmail);
         });
     });
+
 
     afterEach(() =>{
         userRepository.delete(anEmail);
