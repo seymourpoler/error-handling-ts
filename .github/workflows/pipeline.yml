@@ -10,6 +10,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
         - name: Checkout code
           uses: actions/checkout@v3
@@ -20,5 +35,18 @@ jobs:
         - name: Install dependencies
           run: npm install
 
+        - name: Wait for PostgreSQL to be ready
+          run: |
+            until pg_isready -h 127.0.0.1 -p 5432 -U postgres; do
+              echo "Waiting for PostgreSQL to be ready..."
+              sleep 1
+            done
+
+        - name: Create table
+          run: |
+            psql -h localhost -U postgres -d postgres -c "CREATE TABLE users(email VARCHAR(250), email VARCHAR(250), role VARCHAR(50));"
+
         - name: Run tests
+          env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           run: npm run test:vitest 
