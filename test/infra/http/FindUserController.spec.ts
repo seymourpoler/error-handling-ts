@@ -6,6 +6,7 @@ import { FindUserUseCase } from "../../../src/application/User/FindUserUseCase";
 import { FindUserController } from '../../../src/infra/http/FindUserController';
 import { User } from '../../../src/domain/User';
 import { Either } from '../../../src/domain/Either';
+import { json } from 'stream/consumers';
 
 describe('FindUserUseCase Should', () => {
     let findUser: TypeMoq.IMock<FindUserUseCase>;
@@ -25,18 +26,21 @@ describe('FindUserUseCase Should', () => {
 
     const response = await controller.execute(anyRequest, anyResponse);
 
-    expect(response.statusCode).toBe(404)
+    expect(response.statusCode).toBe(404);
+    expect(response._getData()).toBe(JSON.stringify({ message: 'User not found' }));
   });
 
   it('return user, if user is found', async () => {
     const username = 'any-user-name';
     const anyRequest: MockRequest<Request> = createRequest({body:{username}});
     const anyResponse: MockResponse<Response<User>> = createResponse();
-    const anyUser = Either.createRight<Error, User>(new User('any-user-name', 'any-password', 'admin'));
+    const expectedUser = new User('any-user-name', 'any-password', 'admin');
+    const anyUser = Either.createRight<Error, User>(expectedUser);
     findUser.setup(x => x.execute(TypeMoq.It.isAny())).returns(() => Promise.resolve(anyUser));
 
     const response = await controller.execute(anyRequest, anyResponse);
 
     expect(response.statusCode).toBe(200);
+    expect(response._getData()).toBe(JSON.stringify(expectedUser));
   });
 });
